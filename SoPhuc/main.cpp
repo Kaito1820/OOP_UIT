@@ -10,5 +10,6 @@ int main(){
         cout << "ERROR";
         return 0;
     }
+    xuli(a, b);
     return 0;
 }

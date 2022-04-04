@@ -4,14 +4,6 @@ using namespace std;
 
 int main(){
     LinkedList* llist = new LinkedList();
-    int n;
-    do{
-        cin >> n;
-        if(!n){
-            
-        } 
-    }while(n != -1);
-
-
+    xuli(llist);
     return 0;
 }

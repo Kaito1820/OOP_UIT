@@ -81,6 +81,11 @@ public:
     // }
 };
 
+ostream& operator<<(ostream& COUT, PhanSo& ps){
+    COUT << ps.getTu() << '/' << ps.getMau() << '\n';
+    return COUT;
+}
+
 // PhanSo operator+(PhanSo A, PhanSo B){  // Ham Toan Cuc khong thuoc bat ki lop nao
 //     return PhanSo(A.getTu()*B.getMau() + B.getTu() * A.getMau(), A.getMau()*B.getMau());
 // }
@@ -104,6 +109,7 @@ int main(){
         cout << "B is smaller than C" << endl;
     } 
 
+    cout << B << D;
     //A = B + C + D - E;
     //A.Print();
     return 0;

@@ -42,6 +42,9 @@ public:
         return PhanSo(tu * B.mau + mau * B.tu, mau * B.mau);
     }
 
+    PhanSo operator+(int k){
+        return PhanSo(tu + mau*k, mau);
+    }
     // PhanSo operator+(int k){
     //     return PhanSo(tu * B.mau + mau * B.tu, mau * B.mau);
     // }
@@ -79,10 +82,17 @@ public:
     //     ++tu;
     //     return *this;
     // }
+
+    friend istream& operator>>(istream& CIN, PhanSo& ps);
+    friend ostream& operator<<(ostream& COUT, PhanSo& ps);
 };
 
+istream& operator>>(istream& CIN, PhanSo& ps){
+    CIN >> ps.tu >> ps.mau;
+    return CIN;
+}
 ostream& operator<<(ostream& COUT, PhanSo& ps){
-    COUT << ps.getTu() << '/' << ps.getMau() << '\n';
+    COUT << ps.tu << '/' << ps.mau << '\n';
     return COUT;
 }
 
@@ -98,7 +108,10 @@ ostream& operator<<(ostream& COUT, PhanSo& ps){
 
 int main(){
     PhanSo A, B(2,3), C(4,6), D(1,4), E(1,6);
-    
+
+    cin >> A;
+
+    B = B + 5;
     if(B == C){
         cout << "B is equal C" << endl;
     }
@@ -109,7 +122,7 @@ int main(){
         cout << "B is smaller than C" << endl;
     } 
 
-    cout << B << D;
+    cout << A << B << D;
     //A = B + C + D - E;
     //A.Print();
     return 0;

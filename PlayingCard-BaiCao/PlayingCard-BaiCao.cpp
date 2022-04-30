@@ -1,4 +1,6 @@
 #include <iostream>
+#include <ctime>
+#include <string>
 #include <vector>
 using namespace std;
 
@@ -47,22 +49,28 @@ public:
 
     }
 
-    void Print(){
-        cout << rank + " of " + suite << endl;
-    }
+    // void Print(){
+    //     cout << rank + " of " + suite << endl;
+    // }
 
     int getVal(){
         return this->val;
     }
     friend class CPlayingDeck;
+    friend ostream& operator<<(ostream& COUT, CPlayingCard& ps);
 };
 
+ostream& operator<<(ostream& COUT, CPlayingCard& card){
+    COUT << card.rank + " of " + card.suite << endl;
+    return COUT;
+}
 class CPlayingDeck{
 private:
     vector<CPlayingCard> cards;
     int n;
 public:
     CPlayingDeck(){
+        srand(time(NULL));  //Khoi dong bo ngau nhien
         n = 52;
         for(int i = 1; i <= 13; i++){ // tenQuan
             for(int j = 1; j <= 4; j++){ //tenBo
@@ -72,11 +80,12 @@ public:
         }
     }
 
-    void Print(){
-        for(int i = 0; i < n; i++){
-            cards[i].Print();
-        }
-    }
+    // void Print(){
+    //     for(int i = 0; i < n; i++){
+    //         // cards[i].Print();
+    //         cout << cards[i];
+    //     }
+    // }
 
     CPlayingCard DrawRandom(){
         int i = rand() % n;
@@ -88,29 +97,64 @@ public:
         n--;
         return card;
     }
+    friend ostream& operator<<(ostream& COUT, CPlayingDeck& deck);
 };
 
+ostream& operator<<(ostream& COUT, CPlayingDeck& deck){
+    for(int i = 0; i < deck.n; i++){
+        // cards[i].Print();
+        cout << deck.cards[i];
+    }
+    return COUT;
+}
+
+class CPlayer{
+private:
+    int score;
+    CPlayingCard cards[3];
+public:
+    CPlayer(){}
+    void DrawHand(CPlayingDeck& deckCards){
+        score = 0;
+        for(int j = 1; j <= 3; j++){ 
+            CPlayingCard tempCard = deckCards.DrawRandom();
+            // tempCard.Print();
+            cout << tempCard;
+            score += tempCard.getVal(); 
+        }
+        cout << "Score: " << score % 10 << '\n';
+    }
+};
 
 int main(){
     CPlayingDeck deckCards;
     int n, score;
+
     cout << "Enter the number of player: ";
-    cin >> n;
-    for(int i = 1; i <= n ; i ++ ){
-        score = 0;
+    do{
+        cin >> n;
+        if(n > 17) cout <<  "\nNot enough card for " << n << " players\nPlease enter again: ";
+    }while(n > 17);
+
+    for(int i = 1; i <= n ; i ++){
+        CPlayer players; 
+        // score = 0;
         cout << "-----------------------------\n";
         cout << "Player " << i << ":\n";
-        for(int j = 1; j <= 3; j++){
-            CPlayingCard tempCard = deckCards.DrawRandom();
-            tempCard.Print();
-            score += tempCard.getVal(); 
-        }
-        cout << "Score: " << score % 10 << '\n';
+        players.DrawHand(deckCards);
+        // // Each players take 3 random cards
+        // for(int j = 1; j <= 3; j++){ 
+        //     CPlayingCard tempCard = deckCards.DrawRandom();
+        //     // tempCard.Print();
+        //     cout << tempCard;
+        //     score += tempCard.getVal(); 
+        // }
+        // cout << "Score: " << score % 10 << '\n';
         cout << "-----------------------------\n\n";
     }
 
-    cout << "The remaining cards: " << endl;
-    deckCards.Print();
+    cout << "The remaining cards: " << endl << deckCards;
+    // deckCards.Print();
 
     return 0;
 }

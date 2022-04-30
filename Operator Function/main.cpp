@@ -82,9 +82,9 @@ public:
     //     ++tu;
     //     return *this;
     // }
-
     friend istream& operator>>(istream& CIN, PhanSo& ps);
     friend ostream& operator<<(ostream& COUT, PhanSo& ps);
+
 };
 
 istream& operator>>(istream& CIN, PhanSo& ps){

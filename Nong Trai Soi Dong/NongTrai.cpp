@@ -26,8 +26,10 @@ int main(){
     }
     s[s.length() - 1] = ' ';
     cout << s << endl;
+    
     A.luongSua(a,n);
     B.luongSua(b,n);
     C.luongSua(c,n);
+    
     return 0;
 }

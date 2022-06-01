@@ -17,7 +17,7 @@ public:
         cin >> name;
         cin >> age;
     }
-    virtual int getId() = 0;
+
     virtual float getTg() = 0;
     virtual void output(){
         cout << "Ten: " << name << ", tuoi: " << age << ", ";
@@ -33,12 +33,11 @@ public:
         timeBestFriend += 5;
         tg = 5;
     }
-    int getId(){
-        return 1;
-    }
+
     float getTg(){
         return tg;
     }
+
     void output(){
         Friend::output();
         cout << "so dien thoai: " << phone << '\n';   
@@ -55,12 +54,11 @@ public:
         timeBoyFriend += 5*income/10000000.0;
         tg = 5*income/10000000.0;
     }
-    int getId(){
-        return 2;
-    }
+    
     float getTg(){
         return tg;
     }
+
     void output(){
         Friend::output();
         cout << "thu nhap: " << income << "d\n";   
@@ -80,12 +78,11 @@ public:
         else if(attractiveness >= 0.4-0.00001) doThuHut = "trung binh";
         else doThuHut = "thap";
     }
-    int getId(){
-        return 3;
-    }
+
     float getTg(){
         return tg;
     }
+
     void output(){
         Friend::output();
         cout << "do thu hut: " << doThuHut << '\n';   
@@ -125,6 +122,7 @@ int main(){
     for(int i = 0; i < n ; i++){
         if(maxTg < fr[i]->getTg()) maxTg  = fr[i]->getTg();
     }
+
     for(int i = 0 ; i < n; i++){
         if(maxTg == fr[i]->getTg()) fr[i]->output();
     }
